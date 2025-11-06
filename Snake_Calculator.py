@@ -1,12 +1,14 @@
 """
 Snake Calculator
-v1.51
+v1.6
 By Lakshya
 """
 
 
 #----------functions---------
 
+# This fuction's purpose is to calcualte the sine of a number.
+# A sine is the ratio of the length of the side opposite the angle to the length of the hypotenuse
 def calculate_sine():
     import math
     try:
@@ -33,18 +35,24 @@ def ForArith():
         print("Ok!")
     else:
         Invalid()
-        
+# The purpose of this fuction is to tell the suer if any inputs pur in the code are invalid
+# Ex. If you tried to add "e" and"f" it would call Invalid()
 def Invalid():
     print("Input is Invalid. Please try again.")
+# These list the valid operators used in Arithmetic
 def Operators():
     print("addition = +")
     print("subtraction = -")
     print("multiplication = *")
     print("division = /")
+# All of this stuff needs answers, this is just telling the user "The answer is...."
 def AnswerIs():
     print("The answer is...")
+# Idk why this is ehre but itll break the code if i remove it so uh its here i guess
 def emptyLine():
     print()
+# This is the fuction contining the src code, allowing it to be repeated. If you have
+# a better idea, create a pull rq.
 def again():
     import math
     import time
@@ -102,7 +110,7 @@ def again():
                     break
                 else:
                     Invalid()
-                    ForArith
+                    ForArith()
                 
             except ValueError:
                 Invalid()
@@ -320,7 +328,8 @@ def again():
 
 #----------main script---------
 
-
+# calls the fuction to start the code.
 again()
+
 
 
