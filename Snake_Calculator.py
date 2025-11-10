@@ -4,7 +4,6 @@ v1.6
 By Lakshya
 """
 
-
 #----------functions---------
 def get_line_equation(x1, y1, x2, y2):
     """
@@ -362,6 +361,7 @@ def again():
 
 # calls the fuction to start the code.
 again()
+
 
 
 
