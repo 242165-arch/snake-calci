@@ -94,6 +94,7 @@ def again():
     print("13 - triangle angles")
     print("14 - Greatest Common Factor")
     print("15 - equations (one-variable)")
+    print("67 - t̵̲̬̘͇͉̫͑̃̆̂̓̈̿̕̕͜h̴̨̙̄͘͠e̵̛̗̟̙͍̣͔͓̦̗̩̩̳̩͕̿̐̈̈̿̀̍̅̒͊͘̕ ̷̨͔̜̙̰̪̟̝͇̤͗̽͋̆͝s̴͓͓̤̝͉̳̈́̽͋́̀́̇͆̄͌͝͠ͅí̸̯̰̥̣̙̫̙̲̣̺̝͑̍̈́̌̒̈̑͑͐͌̽̈͜͜͝x̴̡̨̡͍̩͎̻̰͙̼̮̳̐̉͒̈́̽͊̕͜͠ ̷͇͓͚̞̭̞̟̱̯̝̳̼̘͚̓͂̈́́͛͌̒̅͂̅̀̕̚͜͝s̵͚͔̠̮̩̥̥̪͎̜̤̼̝̀́͆̒͋̌̇̕e̴̖̞͉͇̙̣̞̲̝̿̈̏̃͒̄̄͗̕͝͝v̵̛̝͓̘̮̳̪̻̀͂̃̽̿̄̊͠é̶̡̨̺̙̱͔̟̺̦̂̋̋̈́̊̅̓͛̚ͅn̷̟̬̱̟̤̆̆̈́̄͋̊͂̍̄̾͝͠ ̴͚̹̼̖̍͛̊̆̾̽̋͊͛͝ì̵̧̨̯̹̟̰͍̻̮̪̞̂́͜s̷̡̥̠̗̟̗̭̞̍͛͆̃̅̈́̍̍͂̒̅́̈͝͝ ̷̧͔̠̯͙̝͉͔̗̜͍̰̗̂̓͒̂̑̊͜f̶̡̨̟̩̩̣̠̟̙̳̯̙̙̐͒͆̐͊̏̏̆̾͒̂͜͜ļ̸̙͍̑̑͛͒͑o̷̢̡̞̬̰̝̹̩̱̭̅w̶̢̡̖̣̤̮̺̱̱̘͙̫͚̑͌͜ǐ̷̧̛̫̫͔͉̱̈́̄̓̽͂̀͌́̒͜͝͝͝n̷̥̻͈͙̦̤͈̞̙̫̠̙͕̈́̋͐̊̑̃̆͑́̓̐͗̚g̵̩̻̖̙̉͘ ̸̨̯͈̬͈̊̓̃̈t̴̡̛̳̗̦̣̬͇̲̪̞̗̝̖̘͙̄̈́́͊͌͌̍̊h̶̢̩̫̲͓̮̫̹̥͉̖̓̒̊̈r̵̳͕̩̰̗̣͙̮̩̳͈̞͚̳̾ō̷̡̡̱͈̲̗̘͖̼̖͐̊͑̈́͗̚ũ̵̧̧̙̝̝̖̹̞̗̖͈̱͑̿̈́̂́̊̇̓̅͝g̴̬̩̠͊̈̾̈́͛̆̓͝͝h̶̹͇̳̣̱͔͓̎̈́̓͆ͅ ̸̜̹̀͐̈̅̀͂̇͘m̸̢͖̗̳̭̮̙̙̓̅̎̽͌̅͠ͅȳ̴̧͇͖̭̜͙̯̪̯͔͚̘͔͇͈̄͘ ̸͉̪͚̪̊̓̐̎̍͆͆̚͝v̶̡̟̟̩̫̍̑̈́̅̀̆͑̌̒͆̋͝͝ẻ̸̛̳̝͖̫̮̀̾̆̉̓̋̂̉̽̑́ͅí̸̳̺͔͔̲͈͍͍̝̱̟̤̭̃̈́̋͊̕ͅn̸̛̯̱̘͗͘s̶̨̢̧̲̬͖̯̼̅͊̕")
     while True:
         try:
             choice = int(input("Please enter your number "))
@@ -151,15 +152,27 @@ def again():
                         Invalid()    
                 elif mathProblemOp == "/":
                     try:
+                        # Ensure 'divisor' is treated as a number (e.g., float or int)
+                        # If 'divisor' is a variable holding a string from user input, convert it:
+                        # divisor = float(divisor) 
+                        
                         current_value = current_value / divisor  # Divide and reassign
                         print(f"Current value: {current_value}")
-                    # TRY TO FIND HOW TO ADD DIVISION.                      wwwwwwwwwwww
-                    #above is ai. i dont think it works. keep trying.
                     
+                        # Call your existing functions
                         AnswerIs()
                         print(str(arithnum) + "!")
-                    except ValueError:
+                    
+                    # Catch the specific error for division by zero
+                    except ZeroDivisionError:
+                        print("Error: Cannot divide by zero.")
                         Invalid()
+                    
+                    # Catch the error if 'divisor' cannot be converted to a number
+                    except ValueError:
+                        print("Error: Invalid number input for divisor.")
+                        Invalid()
+
 
         
     elif choice == 2:
@@ -361,6 +374,7 @@ def again():
 
 # calls the fuction to start the code.
 again()
+
 
 
 
