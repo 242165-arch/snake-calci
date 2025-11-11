@@ -10,7 +10,7 @@ def get_line_equation(x1, y1, x2, y2):
     Calculates the slope (m) and y-intercept (b) for a line 
     passing through two points (x1, y1) and (x2, y2).
     """
-    # Check for vertical line (division by zero)
+    # Check for vertical line (division by zero)                                                                                                                         ....................................................................vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv...................vvvvvvvvvvvvv;dliposuytyfsyetfuenslddjhgygfusjejgyggyguenkdnjfheufskfjhuycnvnb n n n        foipfw fiuofewiuofew iooooooooooooooooooooooooo eLaksiejeijehwwwwwwwwwwww333333333333wwwwwwwwwwweeeeeeee
     if x2 - x1 == 0:
         return None, None 
     # Calculate the slope (m)
@@ -374,6 +374,7 @@ def again():
 
 # calls the fuction to start the code.
 again()
+
 
 
 
