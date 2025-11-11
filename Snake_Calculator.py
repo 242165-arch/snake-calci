@@ -94,6 +94,7 @@ def again():
     print("13 - triangle angles")
     print("14 - Greatest Common Factor")
     print("15 - equations (one-variable)")
+    print("16 - Rounding")
     print("67 - t̵̲̬̘͇͉̫͑̃̆̂̓̈̿̕̕͜h̴̨̙̄͘͠e̵̛̗̟̙͍̣͔͓̦̗̩̩̳̩͕̿̐̈̈̿̀̍̅̒͊͘̕ ̷̨͔̜̙̰̪̟̝͇̤͗̽͋̆͝s̴͓͓̤̝͉̳̈́̽͋́̀́̇͆̄͌͝͠ͅí̸̯̰̥̣̙̫̙̲̣̺̝͑̍̈́̌̒̈̑͑͐͌̽̈͜͜͝x̴̡̨̡͍̩͎̻̰͙̼̮̳̐̉͒̈́̽͊̕͜͠ ̷͇͓͚̞̭̞̟̱̯̝̳̼̘͚̓͂̈́́͛͌̒̅͂̅̀̕̚͜͝s̵͚͔̠̮̩̥̥̪͎̜̤̼̝̀́͆̒͋̌̇̕e̴̖̞͉͇̙̣̞̲̝̿̈̏̃͒̄̄͗̕͝͝v̵̛̝͓̘̮̳̪̻̀͂̃̽̿̄̊͠é̶̡̨̺̙̱͔̟̺̦̂̋̋̈́̊̅̓͛̚ͅn̷̟̬̱̟̤̆̆̈́̄͋̊͂̍̄̾͝͠ ̴͚̹̼̖̍͛̊̆̾̽̋͊͛͝ì̵̧̨̯̹̟̰͍̻̮̪̞̂́͜s̷̡̥̠̗̟̗̭̞̍͛͆̃̅̈́̍̍͂̒̅́̈͝͝ ̷̧͔̠̯͙̝͉͔̗̜͍̰̗̂̓͒̂̑̊͜f̶̡̨̟̩̩̣̠̟̙̳̯̙̙̐͒͆̐͊̏̏̆̾͒̂͜͜ļ̸̙͍̑̑͛͒͑o̷̢̡̞̬̰̝̹̩̱̭̅w̶̢̡̖̣̤̮̺̱̱̘͙̫͚̑͌͜ǐ̷̧̛̫̫͔͉̱̈́̄̓̽͂̀͌́̒͜͝͝͝n̷̥̻͈͙̦̤͈̞̙̫̠̙͕̈́̋͐̊̑̃̆͑́̓̐͗̚g̵̩̻̖̙̉͘ ̸̨̯͈̬͈̊̓̃̈t̴̡̛̳̗̦̣̬͇̲̪̞̗̝̖̘͙̄̈́́͊͌͌̍̊h̶̢̩̫̲͓̮̫̹̥͉̖̓̒̊̈r̵̳͕̩̰̗̣͙̮̩̳͈̞͚̳̾ō̷̡̡̱͈̲̗̘͖̼̖͐̊͑̈́͗̚ũ̵̧̧̙̝̝̖̹̞̗̖͈̱͑̿̈́̂́̊̇̓̅͝g̴̬̩̠͊̈̾̈́͛̆̓͝͝h̶̹͇̳̣̱͔͓̎̈́̓͆ͅ ̸̜̹̀͐̈̅̀͂̇͘m̸̢͖̗̳̭̮̙̙̓̅̎̽͌̅͠ͅȳ̴̧͇͖̭̜͙̯̪̯͔͚̘͔͇͈̄͘ ̸͉̪͚̪̊̓̐̎̍͆͆̚͝v̶̡̟̟̩̫̍̑̈́̅̀̆͑̌̒͆̋͝͝ẻ̸̛̳̝͖̫̮̀̾̆̉̓̋̂̉̽̑́ͅí̸̳̺͔͔̲͈͍͍̝̱̟̤̭̃̈́̋͊̕ͅn̸̛̯̱̘͗͘s̶̨̢̧̲̬͖̯̼̅͊̕")
     while True:
         try:
@@ -345,6 +346,40 @@ def again():
             sign = " + " if y_intercept >= 0 else " - "
             formatted_intercept = abs(y_intercept) 
             print(f"The equation of the line is: y = {slope}x{sign}{formatted_intercept}")
+elif choice == '16':
+    try:
+        # Get the number to be rounded
+        number_to_round = float(input("Enter the number you want to round: "))
+
+        # Display the rounding sub-menu
+        print("\n--- Rounding Options ---")
+        print("1. Nearest Integer")
+        print("2. Nearest Tenth (1 decimal place)")
+        print("3. Nearest Hundredth (2 decimal places)")
+        print("4. Nearest Thousandth (3 decimal places)")
+
+        # Get the user's choice for rounding
+        round_choice = input("Enter your choice (1, 2, 3, or 4): ")
+        
+        rounded_result = None
+
+        if round_choice == '1':
+            rounded_result = round(number_to_round, 0)
+            print(f"Result rounded to nearest integer: {rounded_result}")
+        elif round_choice == '2':
+            rounded_result = round(number_to_round, 1)
+            print(f"Result rounded to nearest tenth: {rounded_result}")
+        elif round_choice == '3':
+            rounded_result = round(number_to_round, 2)
+            print(f"Result rounded to nearest hundredth: {rounded_result}")
+        elif round_choice == '4':
+            rounded_result = round(number_to_round, 3)
+            print(f"Result rounded to nearest thousandth: {rounded_result}")
+        else:
+            print("Invalid rounding choice. Please select from 1, 2, 3, or 4.")
+            
+    except ValueError:
+        print("Invalid input. Please enter a valid number.")
 
     elif choice == 67:
         # Indentation corrected
@@ -374,6 +409,7 @@ def again():
 
 # calls the fuction to start the code.
 again()
+
 
 
 
