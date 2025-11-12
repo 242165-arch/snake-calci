@@ -1,3 +1,4 @@
+# Welcome to Cliprun! 👋
 """
 Snake Calculator
 v1.6
@@ -63,11 +64,37 @@ def AnswerIs():
 # Idk why this is ehre but itll break the code if i remove it so uh its here i guess
 def emptyLine():
     print()
-# This is the fuction contining the src code, allowing it to be repeated. If you have
-# a better idea, create a pull rq.
+#for fuctions
+def plot_function_console(expression, x_min=-10, x_max=10, num_points=100):
+    """
+    Evaluates and plots a mathematical expression in the console.
+    """
+    x = np.linspace(x_min, x_max, num_points)
+    y = []
+    for val in x:
+        try:
+            # Safely evaluate the expression.
+            # Use a dictionary to provide allowed functions and variables
+            # to prevent security issues with arbitrary code execution.
+            scope = {"x": val, "math": math, "sin": math.sin, "cos": math.cos, "sqrt": math.sqrt, "pi": math.pi}
+            result = eval(expression, {"__builtins__": None}, scope)
+            y.append(result)
+        except Exception as e:
+            print(f"Error evaluating expression at x={val}: {e}")
+            return
+
+    plt.scatter(x, y)
+    plt.title(f"Plot of y = {expression}")
+    plt.xlabel("x axis")
+    plt.ylabel("y axis")
+    plt.show()
+''' This is the fuction contining the src code, allowing it to be repeated. If you have
+a better idea, create a pull rq.'''
 def again():
     import math
     import time
+    import plotext as plt
+    import numpy as np
     arithnum = 0
     name = input("What's your name? ")
     print('Hello, ' + name + '!')
@@ -95,7 +122,7 @@ def again():
     print("14 - Greatest Common Factor")
     print("15 - equations (one-variable)")
     print("16 - Rounding")
-    print("67 - t̵̲̬̘͇͉̫͑̃̆̂̓̈̿̕̕͜h̴̨̙̄͘͠e̵̛̗̟̙͍̣͔͓̦̗̩̩̳̩͕̿̐̈̈̿̀̍̅̒͊͘̕ ̷̨͔̜̙̰̪̟̝͇̤͗̽͋̆͝s̴͓͓̤̝͉̳̈́̽͋́̀́̇͆̄͌͝͠ͅí̸̯̰̥̣̙̫̙̲̣̺̝͑̍̈́̌̒̈̑͑͐͌̽̈͜͜͝x̴̡̨̡͍̩͎̻̰͙̼̮̳̐̉͒̈́̽͊̕͜͠ ̷͇͓͚̞̭̞̟̱̯̝̳̼̘͚̓͂̈́́͛͌̒̅͂̅̀̕̚͜͝s̵͚͔̠̮̩̥̥̪͎̜̤̼̝̀́͆̒͋̌̇̕e̴̖̞͉͇̙̣̞̲̝̿̈̏̃͒̄̄͗̕͝͝v̵̛̝͓̘̮̳̪̻̀͂̃̽̿̄̊͠é̶̡̨̺̙̱͔̟̺̦̂̋̋̈́̊̅̓͛̚ͅn̷̟̬̱̟̤̆̆̈́̄͋̊͂̍̄̾͝͠ ̴͚̹̼̖̍͛̊̆̾̽̋͊͛͝ì̵̧̨̯̹̟̰͍̻̮̪̞̂́͜s̷̡̥̠̗̟̗̭̞̍͛͆̃̅̈́̍̍͂̒̅́̈͝͝ ̷̧͔̠̯͙̝͉͔̗̜͍̰̗̂̓͒̂̑̊͜f̶̡̨̟̩̩̣̠̟̙̳̯̙̙̐͒͆̐͊̏̏̆̾͒̂͜͜ļ̸̙͍̑̑͛͒͑o̷̢̡̞̬̰̝̹̩̱̭̅w̶̢̡̖̣̤̮̺̱̱̘͙̫͚̑͌͜ǐ̷̧̛̫̫͔͉̱̈́̄̓̽͂̀͌́̒͜͝͝͝n̷̥̻͈͙̦̤͈̞̙̫̠̙͕̈́̋͐̊̑̃̆͑́̓̐͗̚g̵̩̻̖̙̉͘ ̸̨̯͈̬͈̊̓̃̈t̴̡̛̳̗̦̣̬͇̲̪̞̗̝̖̘͙̄̈́́͊͌͌̍̊h̶̢̩̫̲͓̮̫̹̥͉̖̓̒̊̈r̵̳͕̩̰̗̣͙̮̩̳͈̞͚̳̾ō̷̡̡̱͈̲̗̘͖̼̖͐̊͑̈́͗̚ũ̵̧̧̙̝̝̖̹̞̗̖͈̱͑̿̈́̂́̊̇̓̅͝g̴̬̩̠͊̈̾̈́͛̆̓͝͝h̶̹͇̳̣̱͔͓̎̈́̓͆ͅ ̸̜̹̀͐̈̅̀͂̇͘m̸̢͖̗̳̭̮̙̙̓̅̎̽͌̅͠ͅȳ̴̧͇͖̭̜͙̯̪̯͔͚̘͔͇͈̄͘ ̸͉̪͚̪̊̓̐̎̍͆͆̚͝v̶̡̟̟̩̫̍̑̈́̅̀̆͑̌̒͆̋͝͝ẻ̸̛̳̝͖̫̮̀̾̆̉̓̋̂̉̽̑́ͅí̸̳̺͔͔̲͈͍͍̝̱̟̤̭̃̈́̋͊̕ͅn̸̛̯̱̘͗͘s̶̨̢̧̲̬͖̯̼̅͊̕")
+    print("17 - functions")
     while True:
         try:
             choice = int(input("Please enter your number "))
@@ -346,41 +373,45 @@ def again():
             sign = " + " if y_intercept >= 0 else " - "
             formatted_intercept = abs(y_intercept) 
             print(f"The equation of the line is: y = {slope}x{sign}{formatted_intercept}")
-elif choice == '16':
-    try:
-        # Get the number to be rounded
-        number_to_round = float(input("Enter the number you want to round: "))
+    elif choice == '16':
+        try:
+            # Get the number to be rounded
+            number_to_round = float(input("Enter the number you want to round: "))
 
-        # Display the rounding sub-menu
-        print("\n--- Rounding Options ---")
-        print("1. Nearest Integer")
-        print("2. Nearest Tenth (1 decimal place)")
-        print("3. Nearest Hundredth (2 decimal places)")
-        print("4. Nearest Thousandth (3 decimal places)")
+            # Display the rounding sub-menu
+            print("\n--- Rounding Options ---")
+            print("1. Nearest Integer")
+            print("2. Nearest Tenth (1 decimal place)")
+            print("3. Nearest Hundredth (2 decimal places)")
+            print("4. Nearest Thousandth (3 decimal places)")
 
         # Get the user's choice for rounding
-        round_choice = input("Enter your choice (1, 2, 3, or 4): ")
+            round_choice = input("Enter your choice (1, 2, 3, or 4): ")
         
-        rounded_result = None
+            rounded_result = None
 
-        if round_choice == '1':
-            rounded_result = round(number_to_round, 0)
-            print(f"Result rounded to nearest integer: {rounded_result}")
-        elif round_choice == '2':
-            rounded_result = round(number_to_round, 1)
-            print(f"Result rounded to nearest tenth: {rounded_result}")
-        elif round_choice == '3':
-            rounded_result = round(number_to_round, 2)
-            print(f"Result rounded to nearest hundredth: {rounded_result}")
-        elif round_choice == '4':
-            rounded_result = round(number_to_round, 3)
-            print(f"Result rounded to nearest thousandth: {rounded_result}")
-        else:
-            print("Invalid rounding choice. Please select from 1, 2, 3, or 4.")
+            if round_choice == '1':
+                rounded_result = round(number_to_round, 0)
+                print(f"Result rounded to nearest integer: {rounded_result}")
+            elif round_choice == '2':
+                rounded_result = round(number_to_round, 1)
+                print(f"Result rounded to nearest tenth: {rounded_result}")
+            elif round_choice == '3':
+                rounded_result = round(number_to_round, 2)
+                print(f"Result rounded to nearest hundredth: {rounded_result}")
+            elif round_choice == '4':
+                rounded_result = round(number_to_round, 3)
+                print(f"Result rounded to nearest thousandth: {rounded_result}")
+            else:
+                print("Invalid rounding choice. Please select from 1, 2, 3, or 4.")
             
-    except ValueError:
-        print("Invalid input. Please enter a valid number.")
-
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
+    elif choice == 17:
+            user_input = input("Enter a function to plot (e.g., 'math.sin(x)' or 'x**2') or 'quit': ")
+            if user_input.lower() == 'quit':
+                quit()
+            plot_function_console(user_input)
     elif choice == 67:
         # Indentation corrected
         print("6-6-6-6-6-6-7-7-- SIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENvSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVEN")
@@ -409,8 +440,6 @@ elif choice == '16':
 
 # calls the fuction to start the code.
 again()
-
-
 
 
 
