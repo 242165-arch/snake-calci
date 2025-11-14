@@ -1,448 +1,195 @@
-# Welcome to Cliprun! 👋
-"""
-Snake Calculator
-v1.6
-By Lakshya
-"""
+import tkinter as tk
+from tkinter import messagebox, simpledialog
+import math
 
-#----------functions---------
-def get_line_equation(x1, y1, x2, y2):
-    """
-    Calculates the slope (m) and y-intercept (b) for a line 
-    passing through two points (x1, y1) and (x2, y2).
-    """
-    # Check for vertical line (division by zero)                                                                                                                         ....................................................................vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv...................vvvvvvvvvvvvv;dliposuytyfsyetfuenslddjhgygfusjejgyggyguenkdnjfheufskfjhuycnvnb n n n        foipfw fiuofewiuofew iooooooooooooooooooooooooo eLaksiejeijehwwwwwwwwwwww333333333333wwwwwwwwwwweeeeeeee
+# =============================
+# Snake Calculator - Full UI Version - v2
+# =============================
+
+root = tk.Tk()
+root.title("Snake Calculator UI")
+root.geometry("500x600")
+root.config(bg="#1e1e1e")
+
+# ---------- Functions ----------
+
+def do_arithmetic():
+    try:
+        count = simpledialog.askinteger("Arithmetic", "How many numbers?")
+        if count is None or count < 1:
+            return
+        op = simpledialog.askstring("Operator", "Choose +, -, *, /")
+        if op not in ['+', '-', '*', '/']:
+            messagebox.showerror("Invalid", "Invalid operator")
+            return
+        result = None
+        for i in range(count):
+            num = simpledialog.askfloat("Number", f"Enter number {i+1}:")
+            if num is None:
+                return
+            if result is None:
+                result = num
+            else:
+                if op == '+': result += num
+                elif op == '-': result -= num
+                elif op == '*': result *= num
+                elif op == '/': result /= num
+        messagebox.showinfo("Result", f"Answer: {result}")
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
+
+
+def do_sqrt():
+    n = simpledialog.askfloat("Square Root", "Enter number:")
+    if n is not None:
+        messagebox.showinfo("Result", math.sqrt(n))
+
+
+def do_exponent():
+    base = simpledialog.askfloat("Exponent", "Base:")
+    power = simpledialog.askfloat("Exponent", "Power:")
+    if base is not None and power is not None:
+        messagebox.showinfo("Result", base ** power)
+
+
+def do_fraction_decimal():
+    num = simpledialog.askfloat("Fraction", "Numerator:")
+    den = simpledialog.askfloat("Fraction", "Denominator:")
+    if num is None or den in [None, 0]:
+        return
+    messagebox.showinfo("Decimal", num / den)
+
+
+def do_cube_root():
+    n = simpledialog.askfloat("Cube Root", "Enter number:")
+    if n is not None:
+        messagebox.showinfo("Cube Root", n ** (1/3))
+
+
+def do_abs():
+    n = simpledialog.askfloat("Absolute Value", "Enter number:")
+    if n is not None:
+        messagebox.showinfo("Result", abs(n))
+
+
+def do_factorial():
+    n = simpledialog.askinteger("Factorial", "Enter integer:")
+    if n is not None:
+        messagebox.showinfo("Result", math.factorial(n))
+
+
+def do_log():
+    base = simpledialog.askfloat("Log Base", "Base:")
+    expo = simpledialog.askfloat("Log", "Exponent:")
+    if base and expo:
+        messagebox.showinfo("Result", math.log(expo, base))
+
+
+def do_floor_div():
+    a = simpledialog.askinteger("Floor Division", "Dividend:")
+    b = simpledialog.askinteger("Floor Division", "Divisor:")
+    if a and b:
+        messagebox.showinfo("Result", a // b)
+
+
+def do_area():
+    shape = simpledialog.askstring("Area", "Square or Triangle?")
+    if not shape:
+        return
+    if shape.lower() == "square":
+        s = simpledialog.askfloat("Square", "Side length:")
+        messagebox.showinfo("Result", s * s)
+    elif shape.lower() == "triangle":
+        b = simpledialog.askfloat("Triangle", "Base:")
+        h = simpledialog.askfloat("Triangle", "Height:")
+        messagebox.showinfo("Result", (b * h) / 2)
+
+
+def do_perimeter():
+    count = simpledialog.askinteger("Perimeter", "Number of sides:")
+    if not count:
+        return
+    total = 0
+    for i in range(count):
+        side = simpledialog.askfloat("Side", f"Side {i+1}:")
+        if side: total += side
+    messagebox.showinfo("Perimeter", total)
+
+
+def do_sine():
+    angle = simpledialog.askfloat("Sine", "Angle in degrees:")
+    if angle is not None:
+        messagebox.showinfo("Sine", math.sin(math.radians(angle)))
+
+
+def do_triangle_angle():
+    a = simpledialog.askfloat("Triangle", "Angle 1:")
+    b = simpledialog.askfloat("Triangle", "Angle 2:")
+    if a and b:
+        messagebox.showinfo("Angle", 180 - (a + b))
+
+
+def do_gcf():
+    a = simpledialog.askinteger("GCF", "First number:")
+    b = simpledialog.askinteger("GCF", "Second number:")
+    if a and b:
+        messagebox.showinfo("GCF", math.gcd(a, b))
+
+
+def do_line_equation():
+    x1 = simpledialog.askfloat("Line", "x1:")
+    y1 = simpledialog.askfloat("Line", "y1:")
+    x2 = simpledialog.askfloat("Line", "x2:")
+    y2 = simpledialog.askfloat("Line", "y2:")
+    if x1 is None or y1 is None or x2 is None or y2 is None:
+        return
+
     if x2 - x1 == 0:
-        return None, None 
-    # Calculate the slope (m)
+        messagebox.showinfo("Line", f"Vertical line: x = {x1}")
+        return
+
     m = (y2 - y1) / (x2 - x1)
     b = y1 - m * x1
+    sign = " + " if b >= 0 else " - "
+    messagebox.showinfo("Line", f"y = {m}x{sign}{abs(b)}")
 
-    return m, b
 
-# This fuction's purpose is to calcualte the sine of a number.
-# A sine is the ratio of the length of the side opposite the angle to the length of the hypotenuse
-def calculate_sine():
-    import math
-    try:
-        angle_degrees = float(input("Enter an angle in degrees to find its sine: "))
-        angle_radians = math.radians(angle_degrees)
-        sine_result = math.sin(angle_radians)
-        print(f"The sine of {angle_degrees} degrees is: {sine_result}")
-    except ValueError:
-        print("Invalid input. Please enter a numerical value for the angle.")
-
-    # You can call this function within your main calculator loop or directly
-    calculate_sine()
-def ForArith():
-    mathProblemnums = int(input('How many numbers do you want in your equation? '))
-    Operators()
-    mathProblemOp = str(input("What operator would you like me to use? "))
-    if mathProblemOP == "/":
-        print("Ok!")
-    elif mathProblemOP == "*":
-        print("Ok!")
-    elif mathProblemOP == "-":
-        print("Ok!")
-    elif mathProblemOP == "+":
-        print("Ok!")
+def do_rounding():
+    n = simpledialog.askfloat("Rounding", "Number:")
+    if n is None:
+        return
+    mode = simpledialog.askstring("Rounding", "1=int, 2=0.1, 3=0.01, 4=0.001")
+    if mode == '1': r = round(n, 0)
+    elif mode == '2': r = round(n, 1)
+    elif mode == '3': r = round(n, 2)
+    elif mode == '4': r = round(n, 3)
     else:
-        Invalid()
-# The purpose of this fuction is to tell the suer if any inputs pur in the code are invalid
-# Ex. If you tried to add "e" and"f" it would call Invalid()
-def Invalid():
-    print("Input is Invalid. Please try again.")
-# These list the valid operators used in Arithmetic
-def Operators():
-    print("addition = +")
-    print("subtraction = -")
-    print("multiplication = *")
-    print("division = /")
-# All of this stuff needs answers, this is just telling the user "The answer is...."
-def AnswerIs():
-    print("The answer is...")
-# Idk why this is ehre but itll break the code if i remove it so uh its here i guess
-def emptyLine():
-    print()
-#for fuctions
-def plot_function_console(expression, x_min=-10, x_max=10, num_points=100):
-    """
-    Evaluates and plots a mathematical expression in the console.
-    """
-    x = np.linspace(x_min, x_max, num_points)
-    y = []
-    for val in x:
-        try:
-            # Safely evaluate the expression.
-            # Use a dictionary to provide allowed functions and variables
-            # to prevent security issues with arbitrary code execution.
-            scope = {"x": val, "math": math, "sin": math.sin, "cos": math.cos, "sqrt": math.sqrt, "pi": math.pi}
-            result = eval(expression, {"__builtins__": None}, scope)
-            y.append(result)
-        except Exception as e:
-            print(f"Error evaluating expression at x={val}: {e}")
-            return
+        messagebox.showerror("Invalid", "Not a valid option.")
+        return
+    messagebox.showinfo("Rounded", r)
 
-    plt.scatter(x, y)
-    plt.title(f"Plot of y = {expression}")
-    plt.xlabel("x axis")
-    plt.ylabel("y axis")
-    plt.show()
-''' This is the fuction contining the src code, allowing it to be repeated. If you have
-a better idea, create a pull rq.'''
-def again():
-    import math
-    import time
-    import plotext as plt
-    import numpy as np
-    arithnum = 0
-    name = input("What's your name? ")
-    print('Hello, ' + name + '!')
-    time.sleep(0.47567)
-    print('Welcome to to the snake calculator!')
-    time.sleep(0.376786777777777777887669814)
-    print('How may I help you today? ')
-    print('The following is case sensitive.')
-    emptyLine()
-    time.sleep(0.67)
-    print('Please write your choice as a number from 1-13, determined by the order of the following')
-    print("1 - Arithmetic (Still trying to find out how to do division here)")
-    print("2 - square root")
-    print("3 - exponents")
-    print("4 - Fraction to Decimal Conversion")
-    print('5 - cube root ')
-    print("6 - abs value")
-    print("7 - factorial")
-    print("8 - logarithm")
-    print("9 - Floor Division")
-    print("10 - area (Square, Triangle)")
-    print("11 - perimeter")
-    print("12 - sine")
-    print("13 - triangle angles")
-    print("14 - Greatest Common Factor")
-    print("15 - equations (one-variable)")
-    print("16 - Rounding")
-    print("17 - functions")
-    while True:
-        try:
-            choice = int(input("Please enter your number "))
-            break
-        except ValueError:
-            Invalid()
-    if choice == 1:
-        print('Ok!')
-        print()
-        while True:
-            try: 
-                mathProblemnums = int(input('How many numbers do you want in your equation? '))
-                Operators()
-                mathProblemOp = str(input("What operator would you like me to use? "))
-                if mathProblemOp == "/":
-                    print("Ok!")
-                    break
-                elif mathProblemOp == "*":
-                    print("Ok!")
-                    break
-                elif mathProblemOp == "-":
-                    print("Ok!")
-                    break
-                elif mathProblemOp == "+":
-                    print("Ok!")
-                    break
-                else:
-                    Invalid()
-                    ForArith()
-                
-            except ValueError:
-                Invalid()
-        for i in range(mathProblemnums):
-            while True:
-                if mathProblemOp == "+":
-                    try:
-                        anum = int(input(f"Enter number {i + 1}: "))
-                        arithnum += anum
-                        break
-                    except ValueError:
-                        Invalid()
-                elif mathProblemOp == "-":
-                    try:
-                        anum = int(input(f"Enter number {i + 1}: "))
-                        arithnum -= anum
-                        break
-                    except ValueError:
-                        Invalid()
-                elif mathProblemOp == "*":
-                    try:
-                        anum = int(input(f"Enter number {i + 1}: "))
-                        arithnum *= anum
-                        break
-                    except ValueError:
-                        Invalid()    
-                elif mathProblemOp == "/":
-                    try:
-                        # Ensure 'divisor' is treated as a number (e.g., float or int)
-                        # If 'divisor' is a variable holding a string from user input, convert it:
-                        # divisor = float(divisor) 
-                        
-                        current_value = current_value / divisor  # Divide and reassign
-                        print(f"Current value: {current_value}")
-                    
-                        # Call your existing functions
-                        AnswerIs()
-                        print(str(arithnum) + "!")
-                    
-                    # Catch the specific error for division by zero
-                    except ZeroDivisionError:
-                        print("Error: Cannot divide by zero.")
-                        Invalid()
-                    
-                    # Catch the error if 'divisor' cannot be converted to a number
-                    except ValueError:
-                        print("Error: Invalid number input for divisor.")
-                        Invalid()
+# ---------- UI Buttons ----------
 
+btns = [
+    ("Arithmetic", do_arithmetic),
+    ("Square Root", do_sqrt),
+    ("Exponents", do_exponent),
+    ("Fraction to Decimal", do_fraction_decimal),
+    ("Cube Root", do_cube_root),
+    ("Absolute Value", do_abs),
+    ("Factorial", do_factorial),
+    ("Logarithm", do_log),
+    ("Floor Division", do_floor_div),
+    ("Area", do_area),
+    ("Perimeter", do_perimeter),
+    ("Sine", do_sine),
+    ("Triangle Angle", do_triangle_angle),
+    ("GCF", do_gcf),
+    ("Line Equation", do_line_equation),
+    ("Rounding", do_rounding)
+]
 
-        
-    elif choice == 2:
-        square_root = int(input('What number would you like me to get the square root of? '))
-        square_root2 = str(math.sqrt(square_root))
-        print(square_root2 + ' is the square root of ' + str(square_root))
-    elif choice == 3:
-        exponents = int(input('What number would to like me to find the ___ power of? '))
-        exponents2 = int(input('What power would you like me to raise your number to? '))
-        emptyLine()
-        emptyLine()
-        print(exponents ** exponents2, " is your answer!")
-        time.sleep(2)
-    elif choice == 4:
-        F_to_Dnum = input('numerator? ')
-        F_to_Dden = input("Denominator? ")
-        print(int(F_to_Dnum)/int(F_to_Dden))
-        print(" ")
-        print("answer is above!")
-        
-        print(F_to_DAns + ' Is the decimal equivalent of ' + F_to_D)
-    elif choice == 5:
-        croot = float(input("What number would you like me to get the cube root of? "))
-        emptyLine()
-        emptyLine()
-        print("The cube root of " + str(croot) + "is...")
-        print(croot ** (1 / 3))
-    elif choice == 6:
-        emptyLine()
-        absval = int(input("What would you like the absolute value of? "))
-        print("the absolute value of " + str(absval) + " is " + str(abs(absval) + "!"))
-    elif choice == 7:
-        emptyLine()
-        factorialvalue = input("what number would you like me to get the factorial of? ")
-        print("The facotrial of " + str(factorialvalue) + " is...")
-        emptyLine()
-        emptyLine()
-        print(math.factorial(int(factorialvalue)))
-    elif choice == 8:
-        emptyLine()
-        logbase = input("what is the base of your logarithm? ")
-        logexpo = input("what is the exponent of your logarithm? ")
-        print("the anser to your logarithm with base " + str(logbase) + " and exponent " + str(logexpo) + " is...")
-        print(math.log(int(logexpo), int(logbase)))
-    elif choice == 9:
-        emptyLine()
-        print("So you have chosen floor division.")
-        print("If you didn't know, floor division is")
-        print("just division, but rounding down to")
-        print("a whole number.")
-        floordivend = int(input("What is the dividend? "))
-        floordivisor = int(input("What is the divisor? "))
-        print("Your answer is...")
-        print(".")
-        time.sleep(0.54)
-        print(".")
-        print(floordivend//floordivisor)
-    elif choice == 10:
-        while True:
-            shape = input("Square or Triangle? ")
-            if shape == "Square":
-                try:
-                    squ_sides = int(input("what is the side length of the square? "))
-                    print(squ_sides * squ_sides)
-                    print("The answer is above!")
-                    break
-                except ValueError:
-                    Invalid()
-            elif shape == "square":
-                while True:
-                    try:
-                        squ_sidesl = int(input("what is the side length of the square?"))
-                        print(squ_sidesl * squ_sidesl)
-                        print("The answer is above!    ")
-                        break
-                    except ValueError:
-                        Invalid()
-                    
-            elif shape == "triangle":
-                while True:
-                    try:
-                        basetri = int(input("base? "))
-                        heighttri = int(input("height? "))
-                        bplush = basetri * heighttri
-                        triarea = bplush / 2
-                        AnswerIs()
-                        print(str(triarea))
-                        break
-                    except ValueError:
-                        Invalid() 
-            elif shape == "Triangle":
-                while True:
-                    try:
-                        basetri = int(input("base? "))
-                        heighttri = int(input("height? "))
-                        bplush = basetri * heighttri
-                        triarea = bplush / 2
-                        AnswerIs()
-                        print(str(triarea))
-                        break
-                    except ValueError:
-                        Invalid()
-    elif choice == 11 :
-        while True:
-            try:    
-                sidescount = int(input("how many sides does your shape have? "))
-                sidesunit = str(input("what unit would you like me to use?"))
-                break
-            except ValueError:
-                Invalid()
-        perimeter = 0
-        for guysyallneedtostopwiththe67brainrotitssoweirsandweneedtofixtheworldandlucianogetoffrobloxpleaseyourelectricitybillissocookedman in range(sidescount):
-            while True:
-                try:
-                    num = int(input(f"Enter side number {guysyallneedtostopwiththe67brainrotitssoweirsandweneedtofixtheworldandlucianogetoffrobloxpleaseyourelectricitybillissocookedman + 1}: "))
-                    perimeter += num
-                    break
-                except ValueError:
-                    Invalid()
-        AnswerIs()
-        print(str(perimeter) + sidesunit + "!")
-    elif choice == 12:
-        calculate_sine()
-    elif choice == 13:
-        print("Give me two angles of a triangle and i will give you the third one.")
-        while True:
-            try:
-                randangle1 = int(input("Enter side number 1: "))
-                randangle2 = int(input("Enter side number 2: "))
-                break
-            except ValueError:
-                print("Sorry, invalid input")
-        calcangle = randangle1 + randangle2
-        thirdangle = 180 - calcangle
-        print("The third angle is...")
-        time.sleep(0.4)
-        print(str(calcangle) + '°!')    
-    elif choice == 14:
-        print("Greatest Common Factor = GCF")
-        firstgcf = input("What is the first number you would like to get the GCF of? ")
-        secgcf = input("what is your second number? ")
-        import math
+for text, cmd in btns:
+    tk.Button(root, text=text, command=cmd, height=2, width=25, bg="#2d2d2d", fg="white").pack(pady=5)
 
-# Calculate the GCF (GCD)
-        gcf_value = math.gcd(int(firstgcf), int(secgcf))
-
-# Print the result
-        
-
-        print("The result of the GCF of " + firstgcf + " and " + secgcf + " is..")
-        time.sleep(1)
-        print(".")
-        time.sleep(1)
-        print(".")
-        time.sleep(1)
-        print(str(gcf_value) + "!")
-    elif choice == 15:
-        print("Enter the coordinates for the first point:")
-        x1 = float(input("x1: "))
-        y1 = float(input("y1: "))
-        print("Enter the coordinates for the second point:")
-        x2 = float(input("x2: "))
-        y2 = float(input("y2: "))
-
-        slope, y_intercept = get_line_equation(x1, y1, x2, y2)
-        if slope is None:
-            print(f"This is a vertical line with the equation: x = {x1}")
-        else:
-            # Indentation corrected for the 'else' block content
-            sign = " + " if y_intercept >= 0 else " - "
-            formatted_intercept = abs(y_intercept) 
-            print(f"The equation of the line is: y = {slope}x{sign}{formatted_intercept}")
-    elif choice == '16':
-        try:
-            # Get the number to be rounded
-            number_to_round = float(input("Enter the number you want to round: "))
-
-            # Display the rounding sub-menu
-            print("\n--- Rounding Options ---")
-            print("1. Nearest Integer")
-            print("2. Nearest Tenth (1 decimal place)")
-            print("3. Nearest Hundredth (2 decimal places)")
-            print("4. Nearest Thousandth (3 decimal places)")
-
-        # Get the user's choice for rounding
-            round_choice = input("Enter your choice (1, 2, 3, or 4): ")
-        
-            rounded_result = None
-
-            if round_choice == '1':
-                rounded_result = round(number_to_round, 0)
-                print(f"Result rounded to nearest integer: {rounded_result}")
-            elif round_choice == '2':
-                rounded_result = round(number_to_round, 1)
-                print(f"Result rounded to nearest tenth: {rounded_result}")
-            elif round_choice == '3':
-                rounded_result = round(number_to_round, 2)
-                print(f"Result rounded to nearest hundredth: {rounded_result}")
-            elif round_choice == '4':
-                rounded_result = round(number_to_round, 3)
-                print(f"Result rounded to nearest thousandth: {rounded_result}")
-            else:
-                print("Invalid rounding choice. Please select from 1, 2, 3, or 4.")
-            
-        except ValueError:
-            print("Invalid input. Please enter a valid number.")
-    elif choice == 17:
-            user_input = input("Enter a function to plot (e.g., 'math.sin(x)' or 'x**2') or 'quit': ")
-            if user_input.lower() == 'quit':
-                quit()
-            plot_function_console(user_input)
-    elif choice == 67:
-        # Indentation corrected
-        print("6-6-6-6-6-6-7-7-- SIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENvSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVENSIX SEVEN SIX SEVEN")
-        quit()
-    elif choice == 21:
-        # Indentation corrected
-        print("I would be very good friends with you lol")
-    else:
-        # Indentation corrected
-        print("what you have entered has not been added yet, is invalid, or has a typo. Please try again. Thank you.")
-        again()
-    
-    # Rest of the function (already correctly indented in the original snippet) ...
-
-
-    time.sleep(1.3141592653859)
-    emptyLine()
-    emptyLine()
-    calcagain = input("Wanna use this program again? (Y/N) ")
-    if calcagain == "Y" or calcagain == "y":
-        again()
-    elif calcagain == "n" or calcagain == "N":
-        print('Thank you for using snake calculator, ' + name + '! I wish you a great day!')
-
-#----------main script---------
-
-# calls the fuction to start the code.
-again()
-
-
-
-
-
-
+root.mainloop()
